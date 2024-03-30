@@ -1,21 +1,22 @@
 //EXPRESS BLOCK
 const express = require("express");
-const app = express();
-
-app.use(express.static("./public"));
-
-app.listen(3000, () => {
-  console.log("HTTP Server listening on port 3000");
-});
 
 //WEBSOCKET BLOCK
 const { Server } = require("socket.io");
 const { createServer } = require("node:http");
-const appWebSocket = express();
-const server = createServer(appWebSocket);
-server.listen(8080, () => {
-  console.log("WebSocket Server listening on port 8080");
-});
+
+const app = express();
+
+app.use(express.static("./public"));
+
+// app.listen(3000, () => {
+//   console.log("HTTP Server listening on port 3000");
+// });
+
+// const appWebSocket = express();
+const server = createServer(app);
+const PORT = 3000;
+
 const io = new Server(server, {
   transports: ["websocket"],
   cors: {
@@ -45,4 +46,8 @@ io.on("connection", (socket) => {
     //To broadcast to all clients including the sender
     // io.emit('talk-to-client', `Someone else said: ${message}`);
   });
+});
+
+server.listen(PORT, () => {
+  console.log(`WebSocket Server listening on port ${PORT}`);
 });

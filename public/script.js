@@ -1,20 +1,20 @@
 // const ws = new WebSocket('ws://localhost:8080');
-const socket = io('ws://localhost:8080', {
-    transports: ['websocket'],
+const socket = io("ws://localhost:3000", {
+  transports: ["websocket"],
 });
-const messageDiv = document.getElementById('messages');
-const statusDiv = document.getElementById('current-status');
+const messageDiv = document.getElementById("messages");
+const statusDiv = document.getElementById("current-status");
 
-document.getElementById('send-message').addEventListener('click', () => {
-    const text = document.getElementById('message-input').value;
-    socket.emit('talk-to-server', text);
-})
+document.getElementById("send-message").addEventListener("click", () => {
+  const text = document.getElementById("message-input").value;
+  socket.emit("talk-to-server", text);
+});
 
-socket.on('talk-to-client', (message) => {
-    const div = document.createElement('div');
-    div.className = "new-message";
-    div.innerText = message;
-    messageDiv.appendChild(div);
+socket.on("talk-to-client", (message) => {
+  const div = document.createElement("div");
+  div.className = "new-message";
+  div.innerText = message;
+  messageDiv.appendChild(div);
 });
 
 // ws.addEventListener('message', (event) => {
