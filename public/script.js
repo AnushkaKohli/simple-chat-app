@@ -1,5 +1,5 @@
 // const ws = new WebSocket('ws://localhost:8080');
-const socket = io("ws://simple-chat-app-78is.onrender.com/", {
+const socket = io("wss://simple-chat-app-78is.onrender.com/", {
   transports: ["websocket"],
 });
 const messageDiv = document.getElementById("messages");
